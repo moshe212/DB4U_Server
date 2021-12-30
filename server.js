@@ -13,6 +13,8 @@ dotenv.config();
 
 app.use(cors());
 
+const { DB4U_Func } = require("./DB4U_Func");
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 5000;
@@ -20,8 +22,8 @@ if (port == null || port == "") {
 
 app.get("/api/GetConnList", async (req, res) => {
   console.log(req.body);
-
-  res.send("OK");
+  const Data = await DB4U_Func.getSqldata();
+  res.send(["OK", Data]);
 });
 
 // connectToDB().then(() => {
